@@ -1,5 +1,5 @@
 # VariationalSeq2Seq
-BASELINE: A pytorch implementation of the paper "Latent Variable Dialogue Models and their Diversity"  https://arxiv.org/abs/1702.05962
+A pytorch implementation of the paper "Latent Variable Dialogue Models and their Diversity"  https://arxiv.org/abs/1702.05962
 It introduces a Variational Sequence to Sequence Model to generate diverse dialogues. 
 
 

@@ -9,18 +9,13 @@ It introduces a Variational Sequence to Sequence Model to generate diverse dialo
 
 ## Usage 
 
-#### 1. Clone the repository
-```bash
-$ git clone https://oss.navercorp.com/FFAI/VariationalSeq2Seq.git
-```
-
-#### 2. Prepare dataset
+#### 1. Prepare dataset
 Extract `train.txt` and `valid.txt` from opensubtitle(https://s3.amazonaws.com/opennmt-trainingdata/opensub_qa_en.tgz) to data/
 ```bash
 $ python prepare_data_opensub.py
 ```
 
-#### 3. Train and Test
+#### 2. Train and Test
 ```bash
 $ python main.py
 ```

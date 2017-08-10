@@ -1,7 +1,7 @@
 
 from __future__ import unicode_literals, print_function, division
 from io import open
-
+import os
 import random
 import time
 import math
@@ -221,6 +221,8 @@ if __name__ == '__main__':
     
     input_dir='./data/'
     model_dir=input_dir+'models/'
+    if not os.path.exists(model_dir):
+        os.makedirs(model_dir)
     emb_size = 256 
     rnn_hid_size = 1024
     z_hid_size = 1024  # Get mean and variance of latent variable z
@@ -230,7 +232,7 @@ if __name__ == '__main__':
     save_every=5000
     sample_every=100
     print_every=10
-    learning_rate=0.00005
+    learning_rate=0.0005
     
     p_teach_force=0.5 # prob of using teacher forcing, i.e., inputing decoder with ground truth or generated words 
     

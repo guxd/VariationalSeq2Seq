@@ -146,6 +146,8 @@ def train(embedder, encoder, hidvar, decoder, data_loader, vocab, n_iters, p_tea
         print_loss_decoder+=decoder_loss
         plot_loss_total += total_loss
         if it % save_every ==0:
+            if not os.path.exists('%slatentvar_%s/' % (model_dir, str(it))):
+                os.makedirs('%slatentvar_%s/' % (model_dir, str(it)))
             torch.save(f='%slatentvar_%s/embedder.pckl' % (model_dir, str(it)),obj=embedder)
             torch.save(f='%slatentvar_%s/encoder.pckl' % (model_dir,str(it)),obj=encoder)
             torch.save(f='%slatentvar_%s/hidvar.pckl' % (model_dir,str(it)),obj=hidvar)

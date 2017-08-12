@@ -22,7 +22,10 @@ class Encoder(nn.Module):
         self.hidden_size = hidden_size
 
         #self.embedding = nn.Embedding(vocab_size, emb_size)
-        self.gru = nn.GRU(input_size, hidden_size, batch_first=True, bidirectional=True)
+        self.gru = nn.GRU(input_size, hidden_size, dropout=0.2, batch_first=True, bidirectional=True)
+        for w in self.gru.parameters(): # initialize the gate weights with orthogonal
+            if w.dim()>1:
+                weight_init.orthogonal(w)
 
     def forward(self, input):
         embedded = input#self.embedding(input)  # input: [batch_sz x seq_len]  embedded: [batch_sz x seq_len x emb_sz]
@@ -51,23 +54,6 @@ class LatentVariation(nn.Module):
         z = z * std + mean   # [batch_sz x z_hid_sz]
         
         return z, mean, logvar
-    
-class Descriminator(nn.Module):
-    def __init__(self, hidden_size):
-        super(Descriminator, self).__init__()
-        
-        self.W1=nn.Linear(hidden_size, hidden_size)
-        self.W2=nn.Linear(hidden_size, 1)
-        self.activation=nn.Tanh()
-        self.sigmoid = nn.Sigmoid()
-        
-        
-    def forward(self, q, a): 
-        qa=torch.cat([q, a],1)
-        hid=self.activation(self.W1(qa))
-        out=self.activation(self.W2(hid))
-        out=self.sigmoid(out)
-        return out
         
 
 class Decoder(nn.Module):
@@ -78,7 +64,10 @@ class Decoder(nn.Module):
         self.vocab_size=vocab_size
 
         #self.embedding = nn.Embedding(vocab_size, emb_size)
-        self.gru = nn.GRU(input_size, hidden_size, batch_first=True)
+        self.gru = nn.GRU(input_size, hidden_size, dropout=0.2, batch_first=True)
+        for w in self.gru.parameters(): # initialize the gate weights with orthogonal
+            if w.dim()>1:
+                weight_init.orthogonal(w)
         self.out = nn.Linear(hidden_size, vocab_size)
         self.softmax = nn.LogSoftmax()
         self.dropout=nn.Dropout(p=0.3)

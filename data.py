@@ -39,7 +39,7 @@ class UbuntuDataset(data.Dataset):
         if len(answer)<self.max_seq_len:
             answer=np.append(answer,[0]*self.max_seq_len)
         answer=answer[:self.max_seq_len]
-        question[-1]=0
+        answer[-1]=0
         
         ## get real seq len
         q_len=min(int(q_len),self.max_seq_len) # real length of question for training

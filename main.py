@@ -110,7 +110,7 @@ def _train_step(q_batch, a_batch, q_lens, a_lens, embedder, encoder, hidvar, dec
 ######################################################################
 # The whole training process
 
-def train(embedder, encoder, hidvar, decoder, data_loader, vocab, n_iters, p_teach_force=0.5, model_dir,
+def train(embedder, encoder, hidvar, decoder, data_loader, vocab, n_iters,  model_dir, p_teach_force=0.5,
           save_every=5000, sample_every=100, print_every=10, plot_every=100, learning_rate=0.00005):
     start = time.time()
     print_time_start=start
@@ -265,7 +265,7 @@ if __name__ == '__main__':
                                           )
     vocab = load_dict(input_dir+'vocab.json')
     
-    train(embedder, encoder, hidvar, decoder, train_data_loader, vocab, n_iters, p_teach_force, model_dir,
+    train(embedder, encoder, hidvar, decoder, train_data_loader, vocab, n_iters, model_dir, p_teach_force, 
           save_every=save_every, sample_every=sample_every, print_every=print_every, learning_rate=learning_rate)
 
     

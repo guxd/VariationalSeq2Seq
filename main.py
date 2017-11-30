@@ -80,7 +80,7 @@ def _train_step(q_batch, a_batch, q_lens, a_lens, embedder, encoder, hidvar, dec
             #print("decoder_input_sz_1:")
             #print(decoder_input.size())
         else: # Without teacher forcing: use its own predictions as the next input
-            topi = decoder_output[:,-1].max(1)[1] # topi:[batch_sz x 1] indexes of predicted words
+            topi = decoder_output[:,-1].max(1,keepdim=True)[1] # topi:[batch_sz x 1] indexes of predicted words
             decoder_input = topi#Variable(torch.LongTensor(ni))
             #ni = topi.cpu().numpy().squeeze().tolist() #!!
             #if ni == EOS_token:

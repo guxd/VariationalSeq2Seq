@@ -203,7 +203,7 @@ def sample(embedder, encoder, hidvar, decoder, question, vocab, max_length=MAX_S
     for di in range(max_length):
         decoder_output, decoder_hidden = decoder(
             decoder_input, decoder_hidden)
-        topi = decoder_output[:,-1].max(1)[1] # topi:[batch_sz(=1) x 1] indexes of predicted words
+        topi = decoder_output[:,-1].max(1,keepdim=True)[1] # topi:[batch_sz(=1) x 1] indexes of predicted words
         ni = topi.squeeze().data.cpu().numpy()[0] #!!
         if ni == EOS_token:
             decoded_words.append('<EOS>')
